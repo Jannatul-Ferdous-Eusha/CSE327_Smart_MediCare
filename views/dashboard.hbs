@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  {{! Bootstrap css cdn link }}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    
+    {{!-- Extarnal css file --}}
+    <link rel="stylesheet" href="/static/css/dashboard.css" />
+
+    <title>Dashboard</title>
+</head>
+{{>navbar}}
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-white" id="sidebar-wrapper">
+            <div class="list-group list-group-flush my-5">
+                <a href="#" style="background-color: #1cc3b2;" class="list-group-item list-group-item-action second-text active">
+                    <i class="fa fa-user-md me-2"></i>My Appointments</a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="fa fa-history me-2"></i>My History</a>
+                <a href="/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                <i class="fas fa-power-off me-2"></i>Logout</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div style="padding-top: 50px; padding-left: 30px;">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left fs-4 me-3" id="menu-toggle"></i>
+                    <h2 class="fs-2 m-0">Dashboard</h2>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+
+            <div class="container-fluid px-4">
+                <h2 class="fs-2 m-0">Find All Your Appointments Here</h2>
+                <div class="row my-5">
+                    <h3 class="fs-4 mb-3">Recent Orders</h3>
+                    <div class="col">
+                        <table class="table bg-white rounded shadow-sm  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="50">#</th>
+                                    <th scope="col">Doctor's Name</th>
+                                    <th scope="col">Appointment Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Department</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                {{#each appointments}}
+                                <tr>
+                                    <th scope="row">{{@index}}</th>
+                                    <td>{{this.doctor.name}}</td>
+                                    <td>{{ this.timing }}, {{this.date}}</td>
+                                    <td>{{this.status}}</td>
+                                    <td>{{this.doctor.department}}</td>
+                                </tr>
+                                {{/each}}
+                                
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+    </div>
+
+  {{! Bootstrap js cdn link }}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle");
+
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled");
+        };
+    </script>
+    
+</body>
+
+{{>footer}}
+
+</html>
